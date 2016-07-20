@@ -24,10 +24,15 @@ getAll().then(items => {
 	let container = document.getElementById("history");
 	Object.keys(items).forEach(key => {
 		let tabInfos = items[key];
-		let date = new Date(parseInt(key));
+		let date = new Date(parseInt(key)).toLocaleString();
 
 		let li = document.createElement("li");
-		li.innerText = date.toLocaleString();
+		let a = document.createElement("a");
+		a.href = createDownloadLink(tabInfos);
+		a.innerText = date;
+		a.target = "_blank";
+		a.download = `${date}.json`;
+		li.appendChild(a);
 
 		let button = document.createElement("button");
 		button.innerText = `${tabInfos.length}個のwindowを開く`;
@@ -89,4 +94,14 @@ function getAll() {
 			resolve(items);
 		});
 	});
+}
+
+function createDownloadLink(obj) {
+	let text = JSON.stringify(obj, null, "\t");
+	let blob = new Blob([
+		text
+	], {
+		type: "application/json"
+	});
+	return window.URL.createObjectURL(blob);
 }
