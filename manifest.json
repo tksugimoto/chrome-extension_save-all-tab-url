@@ -1,0 +1,14 @@
+{
+	"name": "開いているタブ一覧を保存",
+	"version": "0.1.0",
+	"manifest_version": 2,
+	"description": "Chromeを閉じた時にWindow情報が保存されないことがあるため",
+	"permissions": [
+		"tabs",
+		"storage"
+	],
+	"browser_action": {
+		"default_title": "開いているタブ一覧",
+		"default_popup": "popup.html"
+	}
+}
