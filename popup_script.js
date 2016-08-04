@@ -44,8 +44,17 @@ const History = {
 				});
 			});
 		});
-
 		li.appendChild(button);
+
+		const delButton = document.createElement("button");
+		delButton.innerText = "削除";
+		delButton.addEventListener("click", () => {
+			if (window.confirm("削除してよいですか？")) {
+				remove(key).then(this.container.removeChild(li));
+			}
+		});
+		li.appendChild(delButton);
+
 		this.container.appendChild(li);
 	}
 };
@@ -105,6 +114,12 @@ function getAll() {
 		chrome.storage.local.get(items => {
 			resolve(items);
 		});
+	});
+}
+
+function remove(key) {
+	return new Promise(resolve => {
+		chrome.storage.local.remove(key, resolve);
 	});
 }
 
