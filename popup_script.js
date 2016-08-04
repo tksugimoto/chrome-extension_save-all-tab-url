@@ -1,6 +1,8 @@
 
 document.getElementById("save").addEventListener("click", () => {
-	getTabInfos().then(save);
+	getTabInfos().then(save).then(({key, tabInfos}) => {
+		History.appendHistory(key, tabInfos);
+	});
 });
 
 getTabInfos().then(tabInfos => {
@@ -81,7 +83,10 @@ function save(tabInfos) {
 		let key = Date.now().toString();
 		items[key] = tabInfos;
 		chrome.storage.local.set(items, () => {
-			resolve(key);
+			resolve({
+				key,
+				tabInfos
+			});
 		});
 	});
 }
