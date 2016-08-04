@@ -20,10 +20,9 @@ getTabInfos().then(tabInfos => {
 	});
 });
 
-getAll().then(items => {
-	let container = document.getElementById("history");
-	Object.keys(items).forEach(key => {
-		let tabInfos = items[key];
+const History = {
+	container: document.getElementById("history"),
+	appendHistory: function (key, tabInfos) {
 		let date = new Date(parseInt(key)).toLocaleString();
 
 		let li = document.createElement("li");
@@ -45,7 +44,15 @@ getAll().then(items => {
 		});
 
 		li.appendChild(button);
-		container.appendChild(li);
+		this.container.appendChild(li);
+	}
+};
+
+getAll().then(items => {
+	let container = document.getElementById("history");
+	Object.keys(items).forEach(key => {
+		let tabInfos = items[key];
+		History.appendHistory(key, tabInfos);
 	});
 });
 
