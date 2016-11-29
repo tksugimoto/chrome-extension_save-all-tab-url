@@ -9,11 +9,16 @@ getTabInfos().then(tabInfos => {
 	let container = document.getElementById("nowTabs");
 	tabInfos.forEach(tabs => {
 		let li = document.createElement("li");
-		li.appendChild(document.createTextNode(`${tabs.length}個のタブ`));
+		const details = document.createElement("details");
+		const summary = document.createElement("summary");
+		summary.style.cursor = "pointer";
+		summary.appendChild(document.createTextNode(`${tabs.length}個のタブ`));
+		details.appendChild(summary);
+		li.appendChild(details);
 		container.appendChild(li);
 
 		let ol = document.createElement("ol");
-		li.appendChild(ol);
+		details.appendChild(ol);
 		tabs.forEach(tab => {
 			let li = document.createElement("li");
 			li.appendChild(document.createTextNode(tab.title));
