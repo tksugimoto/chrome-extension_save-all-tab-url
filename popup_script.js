@@ -45,11 +45,13 @@ const History = {
 		const button = document.createElement("button");
 		button.innerText = `${tabInfos.length}個のwindowを開く`;
 		button.addEventListener("click", () => {
-			tabInfos.forEach(tabs => {
-				chrome.windows.create({
-					url: tabs.map(tab => tab.url)
+			if (window.confirm(`${tabInfos.length}個のwindowを開いてよいですか？`)) {
+				tabInfos.forEach(tabs => {
+					chrome.windows.create({
+						url: tabs.map(tab => tab.url)
+					});
 				});
-			});
+			}
 		});
 		li.appendChild(button);
 
