@@ -6,41 +6,43 @@ document.getElementById("save").addEventListener("click", () => {
 });
 
 getTabInfos().then(tabInfos => {
-	let container = document.getElementById("nowTabs");
+	const container = document.getElementById("nowTabs");
 	tabInfos.forEach(tabs => {
-		let li = document.createElement("li");
 		const details = document.createElement("details");
+
 		const summary = document.createElement("summary");
 		summary.style.cursor = "pointer";
 		summary.appendChild(document.createTextNode(`${tabs.length}個のタブ`));
 		details.appendChild(summary);
+
+		const tabOl = document.createElement("ol");
+		tabs.forEach(tab => {
+			const li = document.createElement("li");
+			li.appendChild(document.createTextNode(tab.title));
+			tabOl.appendChild(li);
+		});
+		details.appendChild(tabOl);
+
+		const li = document.createElement("li");
 		li.appendChild(details);
 		container.appendChild(li);
-
-		let ol = document.createElement("ol");
-		details.appendChild(ol);
-		tabs.forEach(tab => {
-			let li = document.createElement("li");
-			li.appendChild(document.createTextNode(tab.title));
-			ol.appendChild(li);
-		});
 	});
 });
 
 const History = {
 	container: document.getElementById("history"),
 	appendHistory: function (key, tabInfos) {
-		let date = new Date(parseInt(key)).toLocaleString();
+		const date = new Date(parseInt(key)).toLocaleString();
 
-		let li = document.createElement("li");
-		let a = document.createElement("a");
+		const li = document.createElement("li");
+		const a = document.createElement("a");
 		a.href = createDownloadLink(tabInfos);
 		a.innerText = date;
 		a.target = "_blank";
 		a.download = `${date}.json`;
 		li.appendChild(a);
 
-		let button = document.createElement("button");
+		const button = document.createElement("button");
 		button.innerText = `${tabInfos.length}個のwindowを開く`;
 		button.addEventListener("click", () => {
 			tabInfos.forEach(tabs => {
@@ -65,9 +67,8 @@ const History = {
 };
 
 getAll().then(items => {
-	let container = document.getElementById("history");
 	Object.keys(items).forEach(key => {
-		let tabInfos = items[key];
+		const tabInfos = items[key];
 		History.appendHistory(key, tabInfos);
 	});
 });
@@ -77,7 +78,7 @@ function getTabInfos() {
 		chrome.windows.getAll({	
 			populate: true
 		}, windows => {
-			let tabInfos = windows.map(window => {
+			const tabInfos = windows.map(window => {
 				return window.tabs.map(tab => {
 					return {
 						title: tab.title,
@@ -93,8 +94,8 @@ function getTabInfos() {
 
 function save(tabInfos) {
 	return new Promise(resolve => {
-		let items = {};
-		let key = Date.now().toString();
+		const items = {};
+		const key = Date.now().toString();
 		items[key] = tabInfos;
 		chrome.storage.local.set(items, () => {
 			resolve({
@@ -108,7 +109,7 @@ function save(tabInfos) {
 function get(key) {
 	return new Promise(resolve => {
 		chrome.storage.local.get(key, items => {
-			let item = items[key];
+			const item = items[key];
 			resolve(item);
 		});
 	});
@@ -129,8 +130,8 @@ function remove(key) {
 }
 
 function createDownloadLink(obj) {
-	let text = JSON.stringify(obj, null, "\t");
-	let blob = new Blob([
+	const text = JSON.stringify(obj, null, "\t");
+	const blob = new Blob([
 		text
 	], {
 		type: "application/json"
