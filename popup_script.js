@@ -32,7 +32,11 @@ getTabInfos().then(tabInfos => {
 const History = {
 	container: document.getElementById("history"),
 	appendHistory: function (key, tabInfos) {
-		const date = new Date(parseInt(key)).toLocaleString();
+		const date = new Date(parseInt(key)).toLocaleString()
+			.replace(/([/ :])\d(?!\d)/g, (all, sep, num) => {
+				// 数字が1桁しかない場合は2桁にする
+				return `${sep}0${num}`
+			});
 
 		const li = document.createElement("li");
 		const a = document.createElement("a");
