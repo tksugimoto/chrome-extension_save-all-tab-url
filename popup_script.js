@@ -27,6 +27,12 @@ getTabInfos().then(tabInfos => {
 		li.appendChild(details);
 		container.appendChild(li);
 	});
+
+	const windowCount = tabInfos.length;
+	const tabCount = tabInfos.reduce((sum, tabs) => {
+		return sum + tabs.length;
+	}, 0);
+	document.getElementById("info").innerText = `window: ${windowCount}, tab: ${tabCount}`;
 });
 
 const History = {
