@@ -1,6 +1,6 @@
 
 document.getElementById("save").addEventListener("click", () => {
-	getTabInfos().then(save).then(({key, tabInfos}) => {
+	getTabInfos().then(SavedTabHistory.save).then(({key, tabInfos}) => {
 		History.appendHistory(key, tabInfos);
 	});
 });
@@ -69,7 +69,7 @@ const History = {
 		delButton.innerText = "削除";
 		delButton.addEventListener("click", () => {
 			if (window.confirm("削除してよいですか？")) {
-				remove(key).then(this.container.removeChild(li));
+				SavedTabHistory.remove(key).then(this.container.removeChild(li));
 			}
 		});
 		li.appendChild(delButton);
@@ -78,7 +78,7 @@ const History = {
 	}
 };
 
-getAll().then(items => {
+SavedTabHistory.getAll().then(items => {
 	Object.keys(items).forEach(key => {
 		const tabInfos = items[key];
 		History.appendHistory(key, tabInfos);
