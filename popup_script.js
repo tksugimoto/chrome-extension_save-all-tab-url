@@ -99,15 +99,6 @@ function save(tabInfos) {
 	});
 }
 
-function get(key) {
-	return new Promise(resolve => {
-		chrome.storage.local.get(key, items => {
-			const item = items[key];
-			resolve(item);
-		});
-	});
-}
-
 function getAll() {
 	return new Promise(resolve => {
 		chrome.storage.local.get(items => {
