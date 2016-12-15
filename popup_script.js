@@ -69,7 +69,9 @@ const History = {
 		delButton.innerText = "削除";
 		delButton.addEventListener("click", () => {
 			if (window.confirm("削除してよいですか？")) {
-				SavedTabHistory.remove(key).then(this.container.removeChild(li));
+				SavedTabHistory.remove(key).then(() => {
+					this.container.removeChild(li)
+				});
 			}
 		});
 		li.appendChild(delButton);
