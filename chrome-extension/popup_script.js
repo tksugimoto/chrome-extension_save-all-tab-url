@@ -46,7 +46,7 @@ const History = {
 
 		const li = document.createElement("li");
 		const a = document.createElement("a");
-		a.href = createDownloadLink(tabInfos);
+		a.href = createDownloadURL(tabInfos);
 		a.innerText = date;
 		a.target = "_blank";
 		a.download = `${date}.json`;
@@ -87,7 +87,7 @@ SavedTabHistory.getAll().then(items => {
 	});
 });
 
-const createDownloadLink = obj => {
+const createDownloadURL = obj => {
 	const text = JSON.stringify(obj, null, "\t");
 	const blob = new Blob([
 		text
