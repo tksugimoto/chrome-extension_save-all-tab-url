@@ -1,4 +1,4 @@
-function getTabInfos() {
+const getTabInfos = () => {
 	return new Promise(resolve => {
 		chrome.windows.getAll({	
 			populate: true
@@ -15,4 +15,4 @@ function getTabInfos() {
 			resolve(tabInfos);
 		});
 	});
-}
+};

@@ -87,7 +87,7 @@ SavedTabHistory.getAll().then(items => {
 	});
 });
 
-function createDownloadLink(obj) {
+const createDownloadLink = obj => {
 	const text = JSON.stringify(obj, null, "\t");
 	const blob = new Blob([
 		text
@@ -95,4 +95,4 @@ function createDownloadLink(obj) {
 		type: "application/json"
 	});
 	return window.URL.createObjectURL(blob);
-}
+};
