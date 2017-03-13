@@ -1,8 +1,8 @@
 
 const showHistoryCountBadge = () => {
 	SavedTabHistory.getAll().then(items => {
-		const count = Object.keys(items).length;
-		badgeUtil.show(count);
+		const tabSavedTimes = Object.keys(items);
+		badgeUtil.show(tabSavedTimes);
 	});
 };
 

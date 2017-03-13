@@ -4,8 +4,8 @@ document.getElementById("save").addEventListener("click", () => {
 		History.appendHistory(key, tabInfos);
 
 		SavedTabHistory.getAll().then(items => {
-			const count = Object.keys(items).length;
-			badgeUtil.show(count);
+			const tabSavedTimes = Object.keys(items);
+			badgeUtil.show(tabSavedTimes);
 		});
 	});
 });
@@ -78,8 +78,8 @@ const History = {
 					this.container.removeChild(li);
 
 					SavedTabHistory.getAll().then(items => {
-						const count = Object.keys(items).length;
-						badgeUtil.show(count);
+						const tabSavedTimes = Object.keys(items);
+						badgeUtil.show(tabSavedTimes);
 					});
 				});
 			}
@@ -96,8 +96,8 @@ SavedTabHistory.getAll().then(items => {
 		const tabInfos = items[key];
 		History.appendHistory(key, tabInfos);
 	});
-	const count = keys.length;
-	badgeUtil.show(count);
+	const tabSavedTimes = keys;
+	badgeUtil.show(tabSavedTimes);
 });
 
 const createDownloadURL = obj => {
