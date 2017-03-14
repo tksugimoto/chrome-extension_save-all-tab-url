@@ -4,6 +4,7 @@
 	"manifest_version": 2,
 	"description": "開いているWindow/Tab一覧を保存: Chromeを終了した時にWindow情報が保存されてないことがあるため",
 	"permissions": [
+		"alarms",
 		"tabs",
 		"storage"
 	],
