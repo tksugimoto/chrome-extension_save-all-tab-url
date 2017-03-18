@@ -4,9 +4,18 @@
 	"manifest_version": 2,
 	"description": "開いているWindow/Tab一覧を保存: Chromeを終了した時にWindow情報が保存されてないことがあるため",
 	"permissions": [
+		"alarms",
 		"tabs",
 		"storage"
 	],
+	"background": {
+		"persistent": false,
+		"scripts": [
+			"lib/badgeUtil.js",
+			"lib/SavedTabHistory.js",
+			"background.js"
+		]
+	},
 	"browser_action": {
 		"default_title": "開いているタブ一覧",
 		"default_popup": "popup.html"

@@ -2,6 +2,11 @@
 document.getElementById("save").addEventListener("click", () => {
 	getTabInfos().then(SavedTabHistory.save).then(({key, tabInfos}) => {
 		History.appendHistory(key, tabInfos);
+
+		SavedTabHistory.getAll().then(items => {
+			const tabSavedTimes = Object.keys(items);
+			badgeUtil.show(tabSavedTimes);
+		});
 	});
 });
 
@@ -70,7 +75,12 @@ const History = {
 		delButton.addEventListener("click", () => {
 			if (window.confirm("削除してよいですか？")) {
 				SavedTabHistory.remove(key).then(() => {
-					this.container.removeChild(li)
+					this.container.removeChild(li);
+
+					SavedTabHistory.getAll().then(items => {
+						const tabSavedTimes = Object.keys(items);
+						badgeUtil.show(tabSavedTimes);
+					});
 				});
 			}
 		});
@@ -81,10 +91,13 @@ const History = {
 };
 
 SavedTabHistory.getAll().then(items => {
-	Object.keys(items).forEach(key => {
+	const keys = Object.keys(items);
+	keys.forEach(key => {
 		const tabInfos = items[key];
 		History.appendHistory(key, tabInfos);
 	});
+	const tabSavedTimes = keys;
+	badgeUtil.show(tabSavedTimes);
 });
 
 const createDownloadURL = obj => {

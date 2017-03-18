@@ -1,8 +1,17 @@
+const TabHistoryKey = {
+	createKey: () => {
+		return Date.now().toString();
+	},
+	isKeyString: string => {
+		return /^[0-9]+$/.test(string);
+	}
+};
+
 const SavedTabHistory = {
 	save: tabInfos => {
 		return new Promise(resolve => {
 			const items = {};
-			const key = Date.now().toString();
+			const key = TabHistoryKey.createKey();
 			items[key] = tabInfos;
 			chrome.storage.local.set(items, () => {
 				resolve({
@@ -16,6 +25,11 @@ const SavedTabHistory = {
 	getAll: () => {
 		return new Promise(resolve => {
 			chrome.storage.local.get(items => {
+				Object.keys(items).forEach(key => {
+					if (!TabHistoryKey.isKeyString(key)) {
+						delete items[key];
+					}
+				});
 				resolve(items);
 			});
 		});
