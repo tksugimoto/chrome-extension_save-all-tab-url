@@ -66,6 +66,7 @@ const History = {
 			if (window.confirm(`${tabInfos.length}個のwindowを開いてよいですか？`)) {
 				tabInfos.forEach(tabs => {
 					chrome.windows.create({
+						state: chrome.windows.WindowState.MAXIMIZED,
 						url: tabs.map(tab => tab.url),
 					});
 				});
