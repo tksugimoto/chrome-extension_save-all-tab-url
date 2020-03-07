@@ -2,6 +2,7 @@
 	"name": "Save opened windows/tabs",
 	"version": "0.1.0",
 	"manifest_version": 2,
+	"minimum_chrome_version": "61",
 	"description": "開いているWindow/Tab一覧を保存: Chromeを終了した時にWindow情報が保存されてないことがあるため",
 	"permissions": [
 		"alarms",
