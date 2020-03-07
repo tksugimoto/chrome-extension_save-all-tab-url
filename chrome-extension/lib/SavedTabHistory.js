@@ -4,7 +4,7 @@ const TabHistoryKey = {
 	},
 	isKeyString: string => {
 		return /^[0-9]+$/.test(string);
-	}
+	},
 };
 
 const SavedTabHistory = {
@@ -16,7 +16,7 @@ const SavedTabHistory = {
 			chrome.storage.local.set(items, () => {
 				resolve({
 					key,
-					tabInfos
+					tabInfos,
 				});
 			});
 		});
@@ -39,5 +39,5 @@ const SavedTabHistory = {
 		return new Promise(resolve => {
 			chrome.storage.local.remove(key, resolve);
 		});
-	}
+	},
 };
