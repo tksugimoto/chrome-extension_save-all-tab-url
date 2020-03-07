@@ -1,3 +1,6 @@
+import badgeUtil from './lib/badgeUtil.js';
+import getTabInfos from './lib/getTabInfos.js';
+import SavedTabHistory from './lib/SavedTabHistory.js';
 
 document.getElementById('save').addEventListener('click', () => {
 	getTabInfos().then(SavedTabHistory.save).then(({key, tabInfos}) => {

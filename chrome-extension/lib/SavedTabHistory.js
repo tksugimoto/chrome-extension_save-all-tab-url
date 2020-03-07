@@ -41,3 +41,5 @@ const SavedTabHistory = {
 		});
 	},
 };
+
+export default SavedTabHistory;

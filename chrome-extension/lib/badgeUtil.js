@@ -30,3 +30,5 @@ const badgeUtil = {
 		badgeUtil._changeBadgeInfoByTodaySavedStatus(tabSavedTimes);
 	},
 };
+
+export default badgeUtil;

@@ -16,3 +16,5 @@ const getTabInfos = () => {
 		});
 	});
 };
+
+export default getTabInfos;

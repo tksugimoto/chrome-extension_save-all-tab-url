@@ -10,11 +10,7 @@
 	],
 	"background": {
 		"persistent": false,
-		"scripts": [
-			"lib/badgeUtil.js",
-			"lib/SavedTabHistory.js",
-			"background.js"
-		]
+		"page": "background.html"
 	},
 	"browser_action": {
 		"default_title": "開いているタブ一覧",

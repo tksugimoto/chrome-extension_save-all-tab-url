@@ -1,3 +1,7 @@
+import badgeUtil from './lib/badgeUtil.js';
+import getTabInfos from './lib/getTabInfos.js';
+import SavedTabHistory from './lib/SavedTabHistory.js';
+
 getTabInfos().then(SavedTabHistory.save).then(() => {
 	document.getElementById('result').innerText = '保存完了';
 

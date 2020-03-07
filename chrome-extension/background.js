@@ -1,3 +1,5 @@
+import badgeUtil from './lib/badgeUtil.js';
+import SavedTabHistory from './lib/SavedTabHistory.js';
 
 const showHistoryCountBadge = () => {
 	SavedTabHistory.getAll().then(items => {
