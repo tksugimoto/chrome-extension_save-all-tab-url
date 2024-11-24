@@ -1,7 +1,7 @@
 {
 	"name": "Save opened windows/tabs",
 	"version": "0.1.0",
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"minimum_chrome_version": "61",
 	"description": "開いているWindow/Tab一覧を保存: Chromeを終了した時にWindow情報が保存されてないことがあるため",
 	"permissions": [
@@ -10,10 +10,10 @@
 		"storage"
 	],
 	"background": {
-		"persistent": false,
-		"page": "background.html"
+		"type": "module",
+		"service_worker": "background.js"
 	},
-	"browser_action": {
+	"action": {
 		"default_title": "開いているタブ一覧",
 		"default_popup": "popup.html"
 	}

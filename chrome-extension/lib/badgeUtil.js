@@ -1,5 +1,5 @@
 
-const _defaultBrowserActionTitle = chrome.runtime.getManifest().browser_action.default_title;
+const _defaultBrowserActionTitle = chrome.runtime.getManifest().action.default_title;
 
 const _defaultBackgroundColor = [0, 0, 0, 0];
 
@@ -11,7 +11,7 @@ const _changeBadgeInfoByTodaySavedStatus = tabSavedTimes => {
 		return todayDateString === date.toDateString();
 	});
 	const color = isSavedToday ? _defaultBackgroundColor : 'red';
-	chrome.browserAction.setBadgeBackgroundColor({
+	chrome.action.setBadgeBackgroundColor({
 		color,
 	});
 	const count = tabSavedTimes.length;
@@ -19,14 +19,14 @@ const _changeBadgeInfoByTodaySavedStatus = tabSavedTimes => {
 		保存件数: ${count}件
 		今日の保存: ${isSavedToday ? 'あり（青）' : 'なし（赤）'}
 		`.replace(/^\t+/mg, '');
-	chrome.browserAction.setTitle({
+	chrome.action.setTitle({
 		title,
 	});
 };
 
 const show = tabSavedTimes => {
 	const count = tabSavedTimes.length;
-	chrome.browserAction.setBadgeText({
+	chrome.action.setBadgeText({
 		text: String(count),
 	});
 	_changeBadgeInfoByTodaySavedStatus(tabSavedTimes);
